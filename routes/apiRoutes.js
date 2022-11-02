@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const fs = require('fs');
 const db = require('../db/db.json');
+const path = require('path');
 //const uuid = require('helpers/uuid.js');
 
 
@@ -39,17 +40,18 @@ router.post('/notes', (req, res) => {
                 );
             }
         });
-
         const response = {
             status: 'success',
             body: newNote,
         };
-        console.log(response);
+        console.log(response); 
         res.status(201).json(response);
+        //res.sendFile(path.join(__dirname, '/notes'));
     }
     else {
         res.status(500).json('Error in posting review');
     }
+
 });
 
 module.exports = router;
