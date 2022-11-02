@@ -3,12 +3,14 @@ const fs = require('fs');
 const db = require('../db/db.json');
 //const uuid = require('helpers/uuid.js');
 
+
 router.get('/notes', (req, res) => {
     res.json(db)
 });
 
 router.post('/notes', (req, res) => {
     
+    console.log(req.body)
     const {title, text } = req.body;
 
     if (title && text) {
@@ -18,7 +20,7 @@ router.post('/notes', (req, res) => {
             //note_id: uuid(),
         };
 
-        fs.readFile('./db.json', 'utf-8', (err, data) => {
+        fs.readFile('./db/db.json', 'utf-8', (err, data) => {
             if (err) {
                 console.log(err);
             }
@@ -28,8 +30,8 @@ router.post('/notes', (req, res) => {
                 parsedNotes.push(newNote);
 
                 fs.writeFile(
-                    './db.json',
-                    JSON.stringify(parsedNotes, null, 4),
+                    './db/db.json',
+                    JSON.stringify(parsedNotes),
                     (writeErr) =>
                     writeErr
                     ? console.error(writeErr)
