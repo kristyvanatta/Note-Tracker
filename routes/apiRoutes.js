@@ -6,6 +6,7 @@ const uuid = require('../helpers/uuid.js');
 
 
 router.get('/notes', (req, res) => {
+    
     res.json(db)
 });
 
@@ -19,7 +20,7 @@ router.post('/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            note_id: uuid(),
+            id: uuid(),
         };
 
         fs.readFile('./db/db.json', 'utf-8', (err, data) => {
