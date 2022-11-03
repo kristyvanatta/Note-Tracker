@@ -1,13 +1,18 @@
 const router = require('express').Router();
 const fs = require('fs');
-const db = require('../db/db.json');
 const path = require('path');
 const uuid = require('../helpers/uuid.js');
 
 
+
 router.get('/notes', (req, res) => {
-    
-    res.json(db)
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.json(JSON.parse(data));
+});
 });
 
 router.post('/notes', (req, res) => {
@@ -61,5 +66,4 @@ router.post('/notes', (req, res) => {
 });
 
     module.exports = router;
-
 
